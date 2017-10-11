@@ -2,12 +2,20 @@ import QtQuick 2.8
 import QtQuick.Window 2.2
 import QtQuick 2.7
 
+
 Window {
+    property string selectedTimeZone
+    onSelectedTimeZoneChanged: {
+        MyFunctions.setSystemTimeZone(selectedTimeZone)
+        Date.timeZoneUpdated()
+    }
+
     id:root
     visible: true
     width: 640
     height: 380
     title: qsTr("Hello World")
+
     Image
     {
         anchors.fill: parent
@@ -15,16 +23,50 @@ Window {
     }
 
 
+
+    Text
+    {
+        font.pixelSize: root.width/30
+        anchors.top:parent.top
+        anchors.right:parent.right
+        id: timeText
+        color: "#2b2f3b"
+        text: Qt.formatTime(new Date(),"hh:mm:ss")
+    }
+
+    Timer {
+        id: timer
+        interval: 1000
+        repeat: true
+        running: true
+
+        onTriggered:
+        {
+            timeText.text =  Qt.formatTime(new Date(),"hh:mm:ss")
+        }
+    }
+
+
+    Text
+    {
+        id:date
+        font.pixelSize: root.width/30
+        anchors.top:parent.top
+        anchors.left:parent.left
+        text: Qt.formatDateTime(new Date(), "MM/dd/yy")
+        color: "#2b2f3b"
+    }
+
     Image
     {
         id:radioImage
         anchors.top:parent.top
         anchors.left: parent.left
         anchors.topMargin:root.height/15.2
-        //anchors.topMargin: 25
+
 
         anchors.leftMargin:root.width/13
-        //anchors.leftMargin: 48
+
         source: "qrc:/../../radio.png"
         width:root.width/4
         height:root.height/2.8
@@ -126,15 +168,12 @@ Window {
                 id: settingtext
                 text: qsTr("Settings")
                 font.pixelSize: root.width/25.6
-//                anchors.top:parent.top
-//                anchors.left: parent.left
-//                anchors.topMargin:root.height/2.8
-//                anchors.leftMargin: root.width/25
-
                 anchors.top:parent.top
                 anchors.left: parent.left
-              anchors.topMargin:root.height/2.8
+                anchors.topMargin:root.height/2.8
                 anchors.leftMargin: root.width/25
+
+
                 color: "#34495E"
             }
     }
