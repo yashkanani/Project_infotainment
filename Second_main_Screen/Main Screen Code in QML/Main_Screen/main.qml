@@ -106,7 +106,7 @@ Window {
             anchors.top:parent.top
             anchors.left: parent.left
             anchors.topMargin:root.height/2.8
-            anchors.leftMargin: root.width/25
+            anchors.leftMargin: root.width/28
             color: "#34495E"
         }
     }
@@ -126,11 +126,15 @@ Window {
                 id: settingtext
                 text: qsTr("Settings")
                 font.pixelSize: root.width/25.6
+//                anchors.top:parent.top
+//                anchors.left: parent.left
+//                anchors.topMargin:root.height/2.8
+//                anchors.leftMargin: root.width/25
+
                 anchors.top:parent.top
                 anchors.left: parent.left
-                anchors.topMargin: 3
-                //anchors.left: settingimage.left
-                anchors.leftMargin: ((settingimage.width)/2) - 40
+              anchors.topMargin:root.height/2.8
+                anchors.leftMargin: root.width/25
                 color: "#34495E"
             }
     }
